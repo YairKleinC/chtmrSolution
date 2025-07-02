@@ -6,13 +6,13 @@
 
 ## 🧱 רכיבי המערכת המרכזיים
 
-- **Frontend**: ממשק משתמש אינטראקטיבי (לדוגמה React).
-- **API / Backend**: שכבת תיווך, ניהול שאילתות, קישור בין שכבות.
-- **מנוע חיפוש סמנטי**: מבצע המרת שאילתה לוקטור והשוואה לוקטורים של כתבות.
-- **Vector DB**: מאחסן embedding-ים של כל כתבה.
-- **Metadata Store**: שומר נתונים על הכתבות (כותרת, מחבר, תאריך).
-- **Text Embedding Service**: ממיר טקסט לווקטור סמנטי.
-- **Pipeline לעיבוד נתונים**: אוסף כתבות, מנקה, ממיר ומעדכן את בסיסי הנתונים.
+- **Frontend** – ממשק משתמש אינטראקטיבי (React או Vue)
+- **API / Backend** – תיווך בין השכבות, ניהול שאילתות
+- **Semantic Search Engine** – המרת שאילתה לוקטור והשוואה לוקטורים של כתבות
+- **Vector DB** – מאגר של embedding-ים ווקטוריים
+- **Metadata DB** – בסיס נתונים לעובדות כמו כותרת, מחבר, תאריך
+- **Embedding Service** – ממיר טקסטים לוקטורים סמנטיים
+- **Pipeline לעיבוד כתבות** – Scraper → Cleaner → Embedder → Indexer
 
 ---
 
@@ -20,19 +20,19 @@
 
 ```mermaid
 graph TD
-    UI[Frontend<br>(React/Vue)]
-    API[API Gateway<br>(FastAPI/Node.js)]
-    SEM[Semantic Search Engine<br>(FAISS/Elastic)]
-    VDB[Vector DB<br>(Weaviate/Pinecone)]
-    MDB[Metadata DB<br>(PostgreSQL/MongoDB)]
-    EMB[Text Embedding Service<br>(SBERT/OpenAI)]
-    PIPE[News Ingestion Pipeline<br>(Scraper → Cleaner → Embedder)]
+    UI[Frontend]
+    API[API Gateway]
+    SEARCH[Semantic Search Engine]
+    VDB[Vector Database]
+    MDB[Metadata Database]
+    EMB[Embedding Service]
+    PIPE[Ingestion Pipeline]
 
     UI --> API
-    API --> SEM
+    API --> SEARCH
     API --> MDB
-    SEM --> VDB
-    SEM --> EMB
+    SEARCH --> VDB
+    SEARCH --> EMB
     PIPE --> EMB
     PIPE --> VDB
     PIPE --> MDB
